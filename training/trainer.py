@@ -73,7 +73,6 @@ def train(cfg, resume=None, run_name=None):
         if dataset_hash != previous["dataset_manifest_hash"] or split_hash != previous["split_manifest_hash"]:
             raise ValueError("El dataset o las particiones cambiaron desde el checkpoint")
         run = Path(resume).resolve().parent
-        # Reanudar desde una época antigua bifurca la ejecución para conservar su historia.
         last_path = run / "last.pth"
         if last_path.exists() and previous["epoch"] < load_checkpoint(last_path, cfg["model"])["epoch"]:
             run = _new_run(cfg, run_name)
@@ -178,7 +177,6 @@ def train(cfg, resume=None, run_name=None):
                     norms.append(float(norm))
                     scaler.step(optimizer)
                     scaler.update()
-                    # Con gradientes finitos GradScaler efectúa la actualización.
                     scheduler.step()
                     global_step += 1
                     optimizer.zero_grad(set_to_none=True)

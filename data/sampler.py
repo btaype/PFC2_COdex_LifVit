@@ -5,7 +5,6 @@ from torch.utils.data import Sampler
 
 
 class BalancedBatchSampler(Sampler):
-    """Incluye todas las muestras y repite las necesarias para batches completos 50/50."""
     def __init__(self, labels, batch_size, seed=42):
         if batch_size % 2:
             raise ValueError("Batch equilibrado requiere tamaño par")

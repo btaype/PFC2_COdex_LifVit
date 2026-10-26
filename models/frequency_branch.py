@@ -26,7 +26,6 @@ class FrequencyBranch(nn.Module):
         if self.vit.embed_dim != 768 or len(self.vit.blocks) != 12 or self.vit.pos_embed.shape != (1, 197, 768):
             raise ValueError("Backbone ViT incompatible con la tesis")
         self.source = source_info(self.vit, options, initialize, ("head.", "patch_embed."), cache_dir=cache)
-        # Se elimina el patch RGB; nunca aparece como parámetro huérfano en el optimizador.
         self.vit.patch_embed = nn.Identity()
         self.lifting = LearnableLifting2D()
         self.patch_embedding = nn.Conv2d(12, 768, kernel_size=8, stride=8)

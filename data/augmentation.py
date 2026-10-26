@@ -33,5 +33,4 @@ def build_transform(config, train=False):
         ])
     else:
         operations.append(T.Resize((224, 224), interpolation=InterpolationMode.BICUBIC, antialias=True))
-    # Ambas ramas reciben el mismo recorte/aumentos; cada modelo normaliza internamente.
     return T.Compose(operations + [T.ToTensor()])

@@ -17,7 +17,6 @@ def set_training_stage(model, epoch):
         if epoch >= 3:
             for stage in list(backbone.blocks)[-2:]:
                 stage.requires_grad_(True)
-            # Proyección final del backbone, además de las últimas dos etapas MBConv.
             backbone.conv_head.requires_grad_(True)
         if model.spatial.freeze_batchnorm:
             for layer in backbone.modules():
@@ -56,5 +55,4 @@ def build_optimizer(model, config):
         count += parameter.numel()
     if count != sum(p.numel() for p in model.parameters()):
         raise RuntimeError("Optimizador incompleto")
-    # Incluye también los pesos temporalmente congelados; no se reconstruye al descongelar.
     return torch.optim.AdamW(list(grouped.values()))

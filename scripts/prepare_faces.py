@@ -1,4 +1,3 @@
-"""Recorta imágenes con cajas externas explícitas; no inventa un detector facial."""
 import argparse
 import csv
 from pathlib import Path
@@ -11,7 +10,7 @@ from utils.config import resolve
 
 
 def main():
-    parser = argparse.ArgumentParser(description=__doc__)
+    parser = argparse.ArgumentParser(description='Recorta imágenes con cajas externas explícitas; no inventa un detector facial.')
     parser.add_argument("--input-root", required=True)
     parser.add_argument("--output-root", required=True)
     parser.add_argument("--boxes", required=True, help="CSV path,x,y,width,height; una caja auditada por imagen")

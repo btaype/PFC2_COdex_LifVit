@@ -1,4 +1,3 @@
-"""Comprueba los pesos públicos elegidos y Haar inicial; no requiere ni genera datasets."""
 import argparse
 import gc
 import logging
@@ -27,7 +26,6 @@ def verify(name):
         expected = torch.zeros(3, 1, 3, 3)
         expected[:, :, 1, 1] = 1.0 if key.startswith("P") else 0.5
         torch.testing.assert_close(value, expected, atol=0, rtol=0)
-    # Solo un tensor nulo para comprobar dimensiones, sin crear archivos de imágenes.
     tensor = torch.zeros(1, 3, 224, 224)
     with torch.inference_mode():
         frequency = model.frequency(tensor)
@@ -54,7 +52,7 @@ def verify(name):
 
 
 def main():
-    parser = argparse.ArgumentParser(description=__doc__)
+    parser = argparse.ArgumentParser(description='Comprueba los pesos públicos elegidos y Haar inicial; no requiere ni genera datasets.')
     parser.add_argument("--model", choices=(*MODEL_NAMES, "both"), default="both")
     parser.add_argument("--output", default="docs/pretrained_verification.json")
     args = parser.parse_args()

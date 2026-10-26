@@ -33,8 +33,6 @@ def per_generator(labels, probabilities, generators, expected, threshold=0.5):
 
 
 def select_validation_threshold(labels, probabilities):
-    # Criterio predefinido: F1 de Fake; empate -> umbral más cercano a 0.5.
-    # Barrido O(N log N), evitando recalcular F1 para cada imagen.
     y, p = np.asarray(labels), np.asarray(probabilities)
     order = np.argsort(-p, kind="stable")
     sorted_y, sorted_p = y[order], p[order]

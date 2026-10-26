@@ -32,7 +32,6 @@ def load_config(path=None, model=None):
     selected = model or cfg["model"]
     if selected not in MODEL_NAMES:
         raise ValueError(f"Solo se admiten {MODEL_NAMES}")
-    # Los perfiles específicos se aplican antes del protocolo cuando se cambia de modelo.
     if selected != cfg["model"]:
         cfg = merge(read_yaml(ROOT / "configs" / f"{selected}.yaml"), cfg)
         profile = read_yaml(ROOT / "configs" / f"{selected}.yaml")["training"]

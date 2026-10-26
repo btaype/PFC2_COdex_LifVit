@@ -1,4 +1,3 @@
-"""Manifiestos auditables. Nunca se infiere la identidad desde el nombre del archivo."""
 import csv
 import hashlib
 from pathlib import Path
@@ -117,7 +116,6 @@ def read_manifest(path, root, require_groups=False, verify_files=True):
 
 
 def load_records(data_config, create_if_missing=False):
-    """Indexa carpetas sin inventar grupos; conserva inmutable un manifiesto existente."""
     root, manifest = resolve(data_config["root"]), resolve(data_config["manifest"])
     strict = data_config.get("require_group_ids", False)
     if not manifest.exists() and create_if_missing and data_config.get("auto_manifest", True):

@@ -13,7 +13,6 @@ def save_checkpoint(path, state):
 
 
 def load_checkpoint(path, model_name=None):
-    # Sin mmap: en Windows una vista viva impide reemplazar last.pth al reanudar.
     state = torch.load(path, map_location="cpu", weights_only=True)
     required = {"epoch", "model_state_dict", "model_name", "training_config", "preprocessing_config"}
     if not isinstance(state, dict) or required - state.keys():

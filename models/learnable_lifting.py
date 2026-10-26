@@ -1,4 +1,3 @@
-"""Lifting separable invertible; convención: primera letra=filas, segunda=columnas."""
 import torch
 from torch import nn
 from torch.nn import functional as F
@@ -34,7 +33,6 @@ class LearnableLifting2D(nn.Module):
     def subbands(self, x):
         if x.ndim != 4 or x.shape[1] != 3 or x.shape[2] % 2 or x.shape[3] % 2:
             raise ValueError("LLS requiere [B,3,H,W] con H/W pares")
-        # Las sumas y la reconstrucción se calculan en FP32 aun dentro de autocast.
         with torch.autocast(device_type=x.device.type, enabled=False):
             x = x.float()
             even, odd = x[:, :, 0::2, :], x[:, :, 1::2, :]

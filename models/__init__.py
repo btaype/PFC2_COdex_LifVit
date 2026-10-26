@@ -1,4 +1,3 @@
-"""Solo dos detectores públicos: LiftViT y LiftViTH."""
 from .liftvit import LiftViT
 from .liftvit_h import LiftViTH
 

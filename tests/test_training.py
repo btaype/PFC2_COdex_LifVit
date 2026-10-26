@@ -46,7 +46,6 @@ class TrainingTests(unittest.TestCase):
 
     def test_checkpoint_resume_matches_uninterrupted_optimizer(self):
         seed_everything(42)
-        # Un solo parámetro como fixture de serialización, no un detector adicional.
         parameter = torch.nn.Parameter(torch.tensor([1.0]))
         optimizer = torch.optim.AdamW([parameter], lr=0.01)
         scheduler = build_scheduler(optimizer, 10)

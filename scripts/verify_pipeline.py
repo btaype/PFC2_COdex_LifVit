@@ -1,4 +1,3 @@
-"""Prueba integral temporal con las arquitecturas reales y datos sintéticos; no mide detección."""
 import argparse
 import gc
 import json
@@ -34,7 +33,6 @@ def verify(name):
                 Image.fromarray(rng.integers(0, 256, size=(64, 64, 3), dtype=np.uint8)).save(path)
         cfg = load_config(model=name)
         cfg["data"].update(root=str(root), manifest=str(manifest))
-        # Esta prueba verifica la ruta por carpetas, sin CSV de metadatos requerido.
         cfg["vit"]["pretrained"] = False
         cfg["efficientnet"]["pretrained"] = False
         cfg["output_root"] = str(folder / "artifacts")
@@ -82,7 +80,7 @@ def verify(name):
 
 
 def main():
-    parser = argparse.ArgumentParser(description=__doc__)
+    parser = argparse.ArgumentParser(description='Prueba integral temporal con las arquitecturas reales y datos sintéticos; no mide detección.')
     parser.add_argument("--model", choices=(*MODEL_NAMES, "both"), default="both")
     parser.add_argument("--output", default="docs/pipeline_test.json")
     args = parser.parse_args()

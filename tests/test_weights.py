@@ -18,7 +18,6 @@ class WeightsTests(unittest.TestCase):
             self.assertNotIn("pretrained_cfg_overlay", public_model_kwargs("vit_base_patch16_224.augreg_in21k_ft_in1k", Path("cache")))
 
     def test_backbone_loading_rejects_missing_and_mismatched(self):
-        # Fixture mínima para verificar validación de claves y dimensiones de state_dict.
         module = torch.nn.LayerNorm(3)
         with tempfile.TemporaryDirectory() as tmp:
             path = Path(tmp) / "weights.pth"

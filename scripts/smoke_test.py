@@ -1,4 +1,3 @@
-"""Prueba técnica con ruido aleatorio: sus pérdidas no son resultados de detección."""
 import argparse
 import gc
 
@@ -71,7 +70,7 @@ def synthetic_step(name, device, stage=6, batch_size=1, amp=False):
 
 
 def main():
-    parser = argparse.ArgumentParser(description=__doc__)
+    parser = argparse.ArgumentParser(description='Prueba técnica con ruido aleatorio: sus pérdidas no son resultados de detección.')
     parser.add_argument("--model", choices=(*MODEL_NAMES, "both"), default="both")
     parser.add_argument("--device", choices=("auto", "cpu", "cuda"), default="auto")
     parser.add_argument("--stage", type=int, choices=(1, 3, 6), default=6)

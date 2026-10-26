@@ -20,11 +20,9 @@ def cached_public_checkpoint(model_name, cache_dir):
 
 
 def public_model_kwargs(model_name, cache_dir):
-    """Usa el archivo de la fuente pública elegida cuando ya está en caché, sin red."""
     result = {"cache_dir": str(cache_dir)}
     cached = cached_public_checkpoint(model_name, cache_dir)
     if cached:
-        # ViT AugReg publica también NPZ; el archivo del Hub ya es state_dict convertido.
         result["pretrained_cfg_overlay"] = {"file": str(cached), "custom_load": False}
     return result
 
@@ -38,7 +36,6 @@ def file_hash(path):
 
 
 def load_backbone(model, path, excluded):
-    """Checkpoint timm state_dict. Se rechazan cargas parciales silenciosas."""
     obj = torch.load(path, map_location="cpu", weights_only=True)
     state = obj.get("state_dict", obj.get("model_state_dict", obj.get("model", obj)))
     state = {k.removeprefix("module."): v for k, v in state.items()}
