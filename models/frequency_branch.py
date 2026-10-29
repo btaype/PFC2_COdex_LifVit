@@ -24,7 +24,7 @@ class FrequencyBranch(nn.Module):
         self.vit = timm.create_model(options["model_name"], pretrained=public, num_classes=0,
                                      **(public_model_kwargs(options["model_name"], cache) if public else {}))
         if self.vit.embed_dim != 768 or len(self.vit.blocks) != 12 or self.vit.pos_embed.shape != (1, 197, 768):
-            raise ValueError("Backbone ViT incompatible con la tesis")
+            raise ValueError("Backbone ViT incompatible")
         self.source = source_info(self.vit, options, initialize, ("head.", "patch_embed."), cache_dir=cache)
         self.vit.patch_embed = nn.Identity()
         self.lifting = LearnableLifting2D()
